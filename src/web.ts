@@ -102,17 +102,19 @@ export class KakaoLoginPluginWeb extends WebPlugin implements KakaoLoginPlugin {
           throughTalk: true,
           persistAccessToken: true,
           success: (response: LoginResponse) => {
-            console.log(response);
             this.response = response;
+
             const tokenExpire = new Date();
             tokenExpire.setSeconds(
               tokenExpire.getSeconds() + response.expires_in,
             );
+
             const refreshTokenExpire = new Date();
             refreshTokenExpire.setSeconds(
               refreshTokenExpire.getSeconds() +
                 response.refresh_token_expires_in,
             );
+
             resolve({
               accessToken: response.access_token,
               expiredAt: tokenExpire.toISOString(),
@@ -123,9 +125,7 @@ export class KakaoLoginPluginWeb extends WebPlugin implements KakaoLoginPlugin {
               ),
               tokenType: response.token_type,
               idToken: response.id_token,
-              refreshTokenExpiredAt: response.refresh_token_expires_in.toString(
-                10,
-              ),
+              refreshTokenExpiredAt: refreshTokenExpire.toISOString(),
             });
           },
           fail: (error: KakaoError) => {
