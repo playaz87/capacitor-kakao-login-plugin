@@ -118,8 +118,37 @@ talkInChannel(options: { publicId: string; }) => any
 
 ### Android
 
-- Set AndroidManifest.xml
 
+
+- Add kakao string variables
+
+```xml
+<string name="kakao_app_key">{NATIVE_APP_KEY}</string>
+<string name="kakao_scheme">kakao{NATIVE_APP_KEY}</string>
+```
+
+- Set Kakao Repository to `build.gradle`
+
+```shell
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
+    }
+}
+```
+
+- Set dependency in `build.gradle (:app)`
+
+```shell
+dependencies {
+    ...
+    implementation "com.kakao.sdk:v2-all:2.20.6"
+}
+```
+
+- Set AndroidManifest.xml
 ```xml
 <!-- AndroidManifest.xml -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="io.ionic.starter">
@@ -170,18 +199,6 @@ talkInChannel(options: { publicId: string; }) => any
 </manifest>
 ```
 
-- Set Kakao Repository to `build.gradle`
-
-```shell
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
-    }
-}
-```
-
 - Add Kakao Initialization
 
 ```java
@@ -195,13 +212,6 @@ public class MainActivity extends BridgeActivity {
 +      KakaoSdk.init(this, getString(R.string.kakao_app_key);
     }
 }
-```
-
-- Add kakao string variables
-
-```xml
-<string name="kakao_app_key">{NATIVE_APP_KEY}</string>
-<string name="kakao_scheme">kakao{NATIVE_APP_KEY}</string>
 ```
 
 
