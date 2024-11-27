@@ -8,12 +8,13 @@ buildscript {
     ext.kotlin_version = project.hasProperty("kotlin_version") ? rootProject.ext.kotlin_version : '1.9.10'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.2.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21"
+
     }
 }
 
@@ -23,6 +24,13 @@ apply plugin: "kotlin-android"
 android {
     namespace "com.nerdfrenz.kakao"
     compileSdk project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 34
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
     defaultConfig {
         minSdkVersion project.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 23
         targetSdkVersion project.hasProperty('targetSdkVersion') ? rootProject.ext.targetSdkVersion : 34
@@ -51,7 +59,6 @@ android {
 
 repositories {
        google()
-       jcenter()
        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
        mavenCentral()
