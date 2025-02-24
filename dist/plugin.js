@@ -131,8 +131,6 @@ var capacitorKakaoLogin = (function (exports, core) {
 
     exports.KakaoLoginPlugin = KakaoLoginPlugin;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
     return exports;
 
 })({}, capacitorExports);

@@ -25,7 +25,7 @@ android {
     namespace "com.nerdfrenz.kakao"
     compileSdk project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 35
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17
+        jvmTarget = JavaVersion.VERSION_21
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
